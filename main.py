@@ -37,10 +37,14 @@ def main():
         for obj in updatable:
             obj.update(dt) # makes the player and others rotate and move
 
-        for obj in asteroids:
-            if obj.collides(player): # check if asteriod collided with player
+        for aster in asteroids:
+            if aster.collides(player): # check if asteriod collided with player
                 print("GAME OVER!!!")
                 exit(0) # end game
+            for bullet in bullets_active:
+                if aster.collides(bullet):
+                    bullet.kill()
+                    aster.split()
 
         for item in drawable:
             item.draw(screen) # draw player and others on screen
