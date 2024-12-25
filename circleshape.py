@@ -3,7 +3,7 @@ import pygame
 # base class for game objects inherets from pygame
 class CircleShape(pygame.sprite.Sprite):
     def __init__(self, x, y, radius):
-        # we will be using this later
+        # place each class sprite in a group specified by you
         if hasattr(self, "containers"):
             super().__init__(self.containers)
         else:
@@ -20,3 +20,12 @@ class CircleShape(pygame.sprite.Sprite):
     def update(self, dt):
         # sub-classes must override
         pass
+
+    def collides(self, TargetCircle):
+        # check distance between two cricles
+        distance = self.position.distance_to(TargetCircle.position)
+        # chech if both circles are colliding by checking the distance vs radius of both circles
+        if distance <= (self.radius + TargetCircle.radius):
+            return True
+        
+        return False
